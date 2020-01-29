@@ -4,14 +4,11 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="App02_TipoPaginaXF.TipoPagina.Navigation.Modal">
+             x:Class="App02_TipoPaginaXF.TipoPagina.Master.Conteudo"
+             Title="Conteúdo">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="LightSkyBlue">
-            <StackLayout HeightRequest="50" BackgroundColor="LightBlue">
-                <Label Text="Eu sou o título"/>
-                <Button Text="X" Clicked="FecharModal"/>
-            </StackLayout>
-            <Label Text="Eu sou um modal"
+        <StackLayout>
+            <Label Text="Eu sou o conteúdo"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
         </StackLayout>
