@@ -4,12 +4,29 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="App03_LayoutXF.Layouts.Relative.RelativePage">
+             x:Class="App03_LayoutXF.Layouts.Relative.RelativePage"
+             Title="Relative">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+
+        <RelativeLayout>
+
+            <!-- 
+            ConstraintExpression 
+            Type = Informação do elemento relativo (pai ou irmão)
+            ElementName = Informação do nome do elemento (x:Name) relativo, só é necessário quando o elemento é irmão
+            Property = A propriedade do elemento relativo
+            Factor = Porcentagem da Property, valor de 0.1 a 1
+            Constant = Valor constante que será adicionado ou subtraido do Factor
+            -->
+
+            <BoxView RelativeLayout.WidthConstraint="{ ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5 }" BackgroundColor="Blue"/>
+            <BoxView BackgroundColor="Red" Margin="200" HeightRequest="100" WidthRequest="100" x:Name="Vermelho"/>
+            <BoxView BackgroundColor="Green" 
+                     WidthRequest="100" HeightRequest="100"
+                     RelativeLayout.XConstraint="{ ConstraintExpression Type=RelativeToView, ElementName=Vermelho, Property=X, Factor=1, Constant=20 }"
+                     RelativeLayout.YConstraint="{ ConstraintExpression Type=RelativeToView, ElementName=Vermelho, Property=Y, Factor=1, Constant=20 }"/>
+
+        </RelativeLayout>
+
     </ContentPage.Content>
 </ContentPage>

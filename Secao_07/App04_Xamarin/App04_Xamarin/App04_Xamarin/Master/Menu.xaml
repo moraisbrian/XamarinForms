@@ -4,19 +4,12 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="App03_LayoutXF.Layouts.Scroll.ScrollPage"
-             Title="Scroll">
+             x:Class="App04_Xamarin.Master.Menu">
     <ContentPage.Content>
-        
-        <ScrollView Orientation="Both"> <!-- Both = Vertical e Horizontal -->
-            
-            <StackLayout WidthRequest="1000" HeightRequest="1000" BackgroundColor="#CCCCCC">
-                <Label Text="Welcome to Xamarin.Forms!"
+        <StackLayout>
+            <Label Text="Welcome to Xamarin.Forms!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-            </StackLayout>
-            
-        </ScrollView>
-        
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
