@@ -10,7 +10,7 @@ namespace App04_Xamarin
         {
             InitializeComponent();
 
-            MainPage = new App04_Xamarin.Master.Menu();
+            MainPage = new NavigationPage(new App04_Xamarin.Master.Menu());
         }
 
         protected override void OnStart()
