@@ -12,6 +12,12 @@
         <ContentPage Title="Menu">
             <StackLayout>
                 <Button Text="Activity Indicator" Clicked="GoActivityIndicatorPage"/>
+                <Button Text="Progress Bar" Clicked="GoProgressBarPage"/>
+                <Button Text="Box View" Clicked="GoBoxViewPage"/>
+                <Button Text="Label" Clicked="GoLabelPage"/>
+                <Button Text="Button" Clicked="GoButtonPage"/>
+                <Button Text="Entry/Editor" Clicked="GoEntryEditorPage"/>
+                <Button Text="Date Picker" Clicked="GoDatePickerPage"/>
             </StackLayout>
         </ContentPage>
         
