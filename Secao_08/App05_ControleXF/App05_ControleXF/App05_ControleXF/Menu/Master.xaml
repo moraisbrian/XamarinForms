@@ -6,9 +6,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="App05_ControleXF.Menu.Master">
-    
+
     <MasterDetailPage.Master>
-        
+
         <ContentPage Title="Menu">
             <StackLayout>
                 <Button Text="Activity Indicator" Clicked="GoActivityIndicatorPage"/>
@@ -22,11 +22,15 @@
                 <Button Text="Picker" Clicked="GoPickerPage"/>
             </StackLayout>
         </ContentPage>
-        
+
     </MasterDetailPage.Master>
-    
+
     <MasterDetailPage.Detail>
-        <page:MainPage/>
+        <NavigationPage>
+            <x:Arguments>
+                <page:MainPage/>
+            </x:Arguments>
+        </NavigationPage>
     </MasterDetailPage.Detail>
-    
+
 </MasterDetailPage>
