@@ -70,5 +70,11 @@ namespace App05_ControleXF.Menu
             Detail = new NavigationPage(new Controles.PickerPage());
             IsPresented = false;
         }
+
+        private void GoSearchBarPage(object sender, EventArgs args)
+        {
+            Detail = new NavigationPage(new Controles.SearchBarPage());
+            IsPresented = false;
+        }
     }
 }

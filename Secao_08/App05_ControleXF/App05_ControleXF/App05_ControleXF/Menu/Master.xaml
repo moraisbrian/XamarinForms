@@ -20,6 +20,7 @@
                 <Button Text="DatePicker" Clicked="GoDatePickerPage"/>
                 <Button Text="TimePicker" Clicked="GoTimePickerPage"/>
                 <Button Text="Picker" Clicked="GoPickerPage"/>
+                <Button Text="SearchBar" Clicked="GoSearchBarPage"/>
             </StackLayout>
         </ContentPage>
 
