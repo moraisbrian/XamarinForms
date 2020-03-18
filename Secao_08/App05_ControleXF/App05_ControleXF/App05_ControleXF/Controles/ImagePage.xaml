@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="App05_ControleXF.Controles.ImagePage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Image Source="https://pluspng.com/img-png/nodejs-logo-png-nice-images-collection-node-js-desktop-wallpapers-370.png"
+                   Aspect="AspectFit"
+                   IsOpaque="True"
+                   x:Name="ImageOne"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
