@@ -24,6 +24,7 @@
                 <Button Text="Sider/Stepper" Clicked="GoSliderStepperPage"/>
                 <Button Text="Switch" Clicked="GoSwitchPage"/>
                 <Button Text="Image" Clicked="GoImagePage"/>
+                <Button Text="ListView" Clicked="GoListViewPage"/>
             </StackLayout>
         </ContentPage>
 

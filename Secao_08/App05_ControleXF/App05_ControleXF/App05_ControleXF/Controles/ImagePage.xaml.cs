@@ -16,6 +16,19 @@ namespace App05_ControleXF.Controles
         {
             InitializeComponent();
             // ImageOne.IsLoading
+
+            Image imgUSB = new Image();
+            if (Device.RuntimePlatform == Device.UWP)
+            {
+                imgUSB.Source = ImageSource.FromFile("Imagem/usb.jpg");
+            }
+            else
+            {
+                imgUSB.Source = ImageSource.FromFile("usb.jpg");
+            }
+            
+
+            Container.Children.Add(imgUSB);
         }
     }
 }

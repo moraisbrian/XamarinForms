@@ -94,5 +94,11 @@ namespace App05_ControleXF.Menu
             Detail = new NavigationPage(new Controles.ImagePage());
             IsPresented = false;
         }
+        private void GoListViewPage(object sender, EventArgs args)
+        {
+            Detail = new NavigationPage(new Controles.ListViewPage());
+            IsPresented = false;
+        }
+        
     }
 }

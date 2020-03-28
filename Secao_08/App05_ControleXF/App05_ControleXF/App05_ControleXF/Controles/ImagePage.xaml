@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              x:Class="App05_ControleXF.Controles.ImagePage">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout x:Name="Container">
             <Image Source="https://pluspng.com/img-png/nodejs-logo-png-nice-images-collection-node-js-desktop-wallpapers-370.png"
                    Aspect="AspectFit"
                    IsOpaque="True"
