@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using App05_ControleXF.Modelo;
 
 namespace App05_ControleXF.Controles
 {
@@ -15,6 +16,14 @@ namespace App05_ControleXF.Controles
         public ListViewPage()
         {
             InitializeComponent();
+
+            List<Pessoa> lista = new List<Pessoa>();
+            lista.Add(new Pessoa { Nome = "Marcos", Idade = "25" });
+            lista.Add(new Pessoa { Nome = "Fulano", Idade = "26" });
+            lista.Add(new Pessoa { Nome = "Maria", Idade = "19" });
+            lista.Add(new Pessoa { Nome = "Anderson", Idade = "30" });
+
+            ListaPessoas.ItemsSource = lista;
         }
     }
 }

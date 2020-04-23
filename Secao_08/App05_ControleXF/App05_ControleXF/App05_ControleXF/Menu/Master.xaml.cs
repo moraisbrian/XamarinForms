@@ -99,6 +99,20 @@ namespace App05_ControleXF.Menu
             Detail = new NavigationPage(new Controles.ListViewPage());
             IsPresented = false;
         }
+
+        private void GoTableViewPage(object sender, EventArgs args)
+        {
+            Detail = new NavigationPage(new Controles.TableViewPage());
+            IsPresented = false;
+        }
+
+        private void GoWebViewPage(object sender, EventArgs args)
+        {
+            Detail = new NavigationPage(new Controles.WebViewPage());
+            IsPresented = false;
+        }
+
         
+
     }
 }
