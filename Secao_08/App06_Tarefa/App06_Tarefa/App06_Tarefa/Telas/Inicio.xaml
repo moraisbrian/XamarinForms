@@ -15,7 +15,11 @@
             </StackLayout>
 
             <StackLayout x:Name="SLTarefas" Padding="10" Spacing="10">
-                
+                <!--
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Action" />
+                </StackLayout.GestureRecognizers>
+                -->
             </StackLayout>
 
             <Button HorizontalOptions="Center" Clicked="ActionGoCadastro" BackgroundColor="Transparent">
