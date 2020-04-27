@@ -13,6 +13,7 @@
                 <Button Text="Expliciti Style" Clicked="GoExplicitiStylePage" />
                 <Button Text="Global Style" Clicked="GoGlobalStylePage" />
                 <Button Text="Inherit Style" Clicked="GoInheritStylePage" />
+                <Button Text="Dynamic Style" Clicked="GoDynamicStylePage" />
             </StackLayout>
         </ContentPage>
     </MasterDetailPage.Master>
