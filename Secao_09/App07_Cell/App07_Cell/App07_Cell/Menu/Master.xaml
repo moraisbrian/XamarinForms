@@ -9,10 +9,15 @@
     <MasterDetailPage.Master>
         <ContentPage Title="Menu">
             <StackLayout>
+                <Label Text="Celulas" />
                 <Button Text="TextCell" Clicked="GoTextCellPage" />
                 <Button Text="ImageCell" Clicked="GoImageCellPage" />
                 <Button Text="EntryCell" Clicked="GoEntryCellPage" />
                 <Button Text="SwichCell" Clicked="GoSwichCellPage" />
+                <Button Text="ViewCell" Clicked="GoViewCellPage" />
+                <Label Text="Componentes" />
+                <Button Text="ListView" Clicked="GoListViewPage" />
+                <Button Text="ListViewButton" Clicked="GoListViewButtonPage" />
             </StackLayout>
         </ContentPage>
     </MasterDetailPage.Master>

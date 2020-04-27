@@ -41,5 +41,23 @@ namespace App07_Cell.Menu
             Detail = new NavigationPage(new SwichCellPage());
             IsPresented = false;
         }
+
+        public void GoViewCellPage(object sender, EventArgs args)
+        {
+            Detail = new NavigationPage(new ViewCellPage());
+            IsPresented = false;
+        }
+
+        public void GoListViewPage(object sender, EventArgs args)
+        {
+            Detail = new NavigationPage(new ListViewPage());
+            IsPresented = false;
+        }
+
+        public void GoListViewButtonPage(object sender, EventArgs args)
+        {
+            Detail = new NavigationPage(new ListViewButtonPage());
+            IsPresented = false;
+        }
     }
 }
