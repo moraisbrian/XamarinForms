@@ -6,23 +6,25 @@
              mc:Ignorable="d"
              x:Class="App10_Vagas.Paginas.CadastroVaga">
     <ContentPage.Content>
-        <StackLayout>
-            <Entry Placeholder="Vaga" />
-            <Entry Placeholder="Empresa" />
-            <Entry Placeholder="Quantidade" />
-            <Entry Placeholder="Cidade" />
-            <Entry Placeholder="Salario" />
-            <Label Text="Descrição do Cargo" />
-            <Editor HeightRequest="200" />
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Tipo de Cotratação" />
-                <Label Text="CLT" />
-                <Switch />
-                <Label Text="PJ" />
+        <ScrollView>
+            <StackLayout Margin="10">
+                <Entry x:Name="NomeVaga" Placeholder="Vaga" />
+                <Entry x:Name="Empresa" Placeholder="Empresa" />
+                <Entry x:Name="Quantidade" Placeholder="Quantidade" />
+                <Entry x:Name="Cidade" Placeholder="Cidade" />
+                <Entry x:Name="Salario" Placeholder="Salario" />
+                <Label Text="Descrição do Cargo" />
+                <Editor x:Name="Descricao" HeightRequest="200" />
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Tipo de Cotratação" />
+                    <Label Text="CLT" />
+                    <Switch x:Name="TipoCotratacao" />
+                    <Label Text="PJ" />
+                </StackLayout>
+                <Entry x:Name="Telefone" Placeholder="Telefone" />
+                <Entry x:Name="Email" Placeholder="Email" />
+                <Button Text="Salvar" HorizontalOptions="End" Clicked="SalvarAction" />
             </StackLayout>
-            <Entry Placeholder="Telefone" />
-            <Entry Placeholder="Email" />
-            <Button Text="Salvar" HorizontalOptions="End" />
-        </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

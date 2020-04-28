@@ -36,7 +36,9 @@ namespace App10_Vagas.Banco
         {
             return _conexao.Table<Vaga>()
                 .Where(x => x.NomeVaga
-                .Contains(palavra))
+                    .ToLower()
+                .Contains(palavra
+                    .ToLower()))
                 .FirstOrDefault();
         }
 
