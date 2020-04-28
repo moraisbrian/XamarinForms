@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="App10_Vagas.Paginas.CadastroVaga">
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry Placeholder="Vaga" />
+            <Entry Placeholder="Empresa" />
+            <Entry Placeholder="Quantidade" />
+            <Entry Placeholder="Cidade" />
+            <Entry Placeholder="Salario" />
+            <Label Text="Descrição do Cargo" />
+            <Editor HeightRequest="200" />
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Tipo de Cotratação" />
+                <Label Text="CLT" />
+                <Switch />
+                <Label Text="PJ" />
+            </StackLayout>
+            <Entry Placeholder="Telefone" />
+            <Entry Placeholder="Email" />
+            <Button Text="Salvar" HorizontalOptions="End" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
