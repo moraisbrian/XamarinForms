@@ -4,7 +4,9 @@ using System.Text;
 
 namespace App11_Mimica.Model
 {
-    class Grupo
+    public class Grupo
     {
+        public string Nome { get; set; }
+        public short Pontuacao { get; set; }
     }
 }

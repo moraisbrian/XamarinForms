@@ -10,7 +10,7 @@ namespace App11_Mimica
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            //MainPage = new MainPage();
         }
 
         protected override void OnStart()

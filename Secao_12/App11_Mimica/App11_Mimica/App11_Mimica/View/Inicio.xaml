@@ -4,12 +4,28 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             Title="Jogo de Mímica"
              x:Class="App11_Mimica.View.Inicio">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Margin="10">
+            <Label Text="Nome do Grupo 1" />
+            <Entry Placeholder="(Opcional)" />
+            <Label Text="Nome do Grupo 2" />
+            <Entry Placeholder="(Opcional)" />
+            <Label Text="Nível" />
+            <Picker>
+                <Picker.Items>
+                    <x:String>Aleatório</x:String>
+                    <x:String>Fácil</x:String>
+                    <x:String>Médio</x:String>
+                    <x:String>Difícil</x:String>
+                </Picker.Items>
+            </Picker>
+            <Label Text="Tempo de cada palavra(seg)" />
+            <Entry Text="120" />
+            <Label Text="Rodadas" />
+            <Entry Text="7" />
+            <Button Text="Iniciar" HorizontalOptions="CenterAndExpand" BackgroundColor="#000000" TextColor="#FFFFFF" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
