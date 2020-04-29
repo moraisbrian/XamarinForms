@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using App11_Mimica.View;
 
 namespace App11_Mimica
 {
@@ -10,7 +11,7 @@ namespace App11_Mimica
         {
             InitializeComponent();
 
-            //MainPage = new MainPage();
+            MainPage = new Inicio();
         }
 
         protected override void OnStart()

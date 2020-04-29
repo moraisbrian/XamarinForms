@@ -9,22 +9,22 @@
         <StackLayout Margin="10">
             <StackLayout>
                 <Label Text="Grupo" />
-                <Label Text="Palavra - Pontuação (1)" />
-                <Label Text="************" HorizontalOptions="CenterAndExpand" />
-                <Button Text="Mostrar" BackgroundColor="Black" TextColor="White" HorizontalOptions="StartAndExpand" />
+                <Label Text="{Binding PalavraPontuacao}" />
+                <Label Text="{Binding Palavra}" HorizontalOptions="CenterAndExpand" />
+                <Button Command="{Binding MostarPalavra}" IsVisible="{Binding IsVisibleBtnMostrar}" Text="Mostrar" BackgroundColor="Black" TextColor="White" HorizontalOptions="StartAndExpand" />
             </StackLayout>
             <StackLayout>
-                <StackLayout Spacing="0">
-                    <Label Text="200" FontSize="100" HorizontalOptions="CenterAndExpand"/>
+                <StackLayout Spacing="0" IsVisible="{Binding IsVisibleContainerContagem}">
+                    <Label Text="{Binding TextoContagem}" FontSize="100" HorizontalOptions="CenterAndExpand"/>
                     <Label Text="seg" HorizontalOptions="CenterAndExpand" />
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="10">
-                    <Button Text="Acertou" BackgroundColor="Green" TextColor="White" />
-                    <Button Text="Errou" BackgroundColor="Orange" TextColor="White" />
+                    <Button Text="Acertou" BackgroundColor="Green" TextColor="White" Command="{Binding Acertou}" />
+                    <Button Text="Errou" BackgroundColor="Orange" TextColor="White" Command="{Binding Errou}" />
                 </StackLayout>
             </StackLayout>
-            <StackLayout>
-                <Button Text="Iniciar" />
+            <StackLayout IsVisible="{Binding IsVisibleContainerIniciar}">
+                <Button Text="Iniciar" Command="{Binding Iniciar}" />
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

@@ -15,6 +15,8 @@ namespace App11_Mimica.View
         public Inicio()
         {
             InitializeComponent();
+
+            BindingContext = new ViewModel.InicioViewModel();
         }
     }
 }
