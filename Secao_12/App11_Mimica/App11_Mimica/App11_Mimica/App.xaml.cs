@@ -2,7 +2,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace App10_Vagas
+namespace App11_Mimica
 {
     public partial class App : Application
     {
@@ -10,7 +10,7 @@ namespace App10_Vagas
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new Paginas.ConsultarVagas());
+            MainPage = new MainPage();
         }
 
         protected override void OnStart()

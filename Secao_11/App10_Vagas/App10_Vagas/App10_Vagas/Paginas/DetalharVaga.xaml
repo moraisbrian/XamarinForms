@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="App10_Vagas.Paginas.DetalheVaga">
+             x:Class="App10_Vagas.Paginas.DetalharVaga">
     <ContentPage.Content>
         <StackLayout Margin="10">
             <Label Text="{Binding NomeVaga}" FontSize="18" HorizontalOptions="Center" FontAttributes="Bold" />

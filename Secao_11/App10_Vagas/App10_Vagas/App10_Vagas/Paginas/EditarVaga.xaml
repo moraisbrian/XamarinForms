@@ -6,10 +6,25 @@
              mc:Ignorable="d"
              x:Class="App10_Vagas.Paginas.EditarVaga">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout Margin="10">
+                <Entry x:Name="NomeVaga" Placeholder="Vaga" />
+                <Entry x:Name="Empresa" Placeholder="Empresa" />
+                <Entry x:Name="Quantidade" Placeholder="Quantidade" />
+                <Entry x:Name="Cidade" Placeholder="Cidade" />
+                <Entry x:Name="Salario" Placeholder="Salario" />
+                <Label Text="Descrição do Cargo" />
+                <Editor x:Name="Descricao" HeightRequest="200" />
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Tipo de Cotratação" />
+                    <Label Text="CLT" />
+                    <Switch x:Name="TipoCotratacao" />
+                    <Label Text="PJ" />
+                </StackLayout>
+                <Entry x:Name="Telefone" Placeholder="Telefone" />
+                <Entry x:Name="Email" Placeholder="Email" />
+                <Button Text="Salvar" HorizontalOptions="End" Clicked="SalvarAction" />
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

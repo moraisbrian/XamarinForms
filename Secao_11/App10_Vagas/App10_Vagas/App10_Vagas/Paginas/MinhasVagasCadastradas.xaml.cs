@@ -35,7 +35,7 @@ namespace App10_Vagas.Paginas
         private void EditarAction(object sender, EventArgs args)
         {
             Vaga vaga = (Vaga)((TapGestureRecognizer)((Label)sender).GestureRecognizers[0]).CommandParameter;
-            Navigation.PushAsync(new CadastroVaga());
+            Navigation.PushAsync(new EditarVaga(vaga));
         }
 
         private void ExcluirAction(object sender, EventArgs args)
@@ -46,6 +46,16 @@ namespace App10_Vagas.Paginas
             database.Deletar(vaga);
 
             ConsultarVagas();
+        }
+
+        private void PesquisarAction(object sender, TextChangedEventArgs args)
+        {
+            ListaVagas.ItemsSource = Lista
+                .Where(x => x.NomeVaga
+                .ToLower()
+                .Contains(args.NewTextValue
+                .ToLower()))
+                .ToList();
         }
     }
 }

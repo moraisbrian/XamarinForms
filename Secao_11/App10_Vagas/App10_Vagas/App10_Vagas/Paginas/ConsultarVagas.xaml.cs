@@ -12,10 +12,10 @@ using Xamarin.Forms.Xaml;
 namespace App10_Vagas.Paginas
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ConsultaVagas : ContentPage
+    public partial class ConsultarVagas : ContentPage
     {
         public List<Vaga> Lista { get; set; }
-        public ConsultaVagas()
+        public ConsultarVagas()
         {
             InitializeComponent();
 
@@ -28,7 +28,7 @@ namespace App10_Vagas.Paginas
 
         private void GoCadastro(object sender, EventArgs args)
         {
-            Navigation.PushAsync(new CadastroVaga());
+            Navigation.PushAsync(new CadastrarVaga());
         }
 
         private void GoMinhasVagas(object sender, EventArgs args)
@@ -39,7 +39,7 @@ namespace App10_Vagas.Paginas
         private void MaisDetalheAction(object sender, EventArgs args)
         {
             Vaga vaga = (Vaga)((TapGestureRecognizer)((Label)sender).GestureRecognizers[0]).CommandParameter;
-            Navigation.PushAsync(new DetalheVaga(vaga));
+            Navigation.PushAsync(new DetalharVaga(vaga));
         }
 
         private void PesquisarAction(object sender, TextChangedEventArgs args)

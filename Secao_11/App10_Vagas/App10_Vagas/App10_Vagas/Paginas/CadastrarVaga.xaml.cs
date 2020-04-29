@@ -12,9 +12,9 @@ using Xamarin.Forms.Xaml;
 namespace App10_Vagas.Paginas
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CadastroVaga : ContentPage
+    public partial class CadastrarVaga : ContentPage
     {
-        public CadastroVaga()
+        public CadastrarVaga()
         {
             InitializeComponent();
 
@@ -36,7 +36,7 @@ namespace App10_Vagas.Paginas
             Database database = new Database();
             database.Cadastro(vaga);
 
-            App.Current.MainPage = new NavigationPage(new ConsultaVagas());
+            App.Current.MainPage = new NavigationPage(new ConsultarVagas());
         }
     }
 }
