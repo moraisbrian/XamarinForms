@@ -13,16 +13,45 @@ namespace App11_Mimica.ViewModel
         public Command IniciarCommand { get; set; }
         public Jogo Jogo { get; set; }
 
+        private string _msgErro;
+        public string MsgErro 
+        { 
+            get { return _msgErro; }
+            set { _msgErro = value; OnPropertyChanged("MsgErro"); }
+        }
+
+
         public InicioViewModel()
         {
             IniciarCommand = new Command(IniciarJogo);
+            Jogo = new Jogo();
+            Jogo.Grupo1 = new Grupo();
+            Jogo.Grupo2 = new Grupo();
+
+            Jogo.TempoPalavra = 120;
+            Jogo.Rodadas = 7;
         }
 
         private void IniciarJogo()
         {
-            DataAccess.Jogo = this.Jogo;
-            DataAccess.RodadaAtual = 1;
-            App.Current.MainPage = new View.Jogo();
+            string erro = "";
+            if (Jogo.TempoPalavra < 10)
+                erro += "O tempo mínimo para o tempo da palavra é 10 segundos.\n";
+            if (Jogo.Rodadas <= 0)
+                erro += "O valor mínimo para a rodada é 1.";
+
+            if (erro == "")
+            {
+                DataAccess.Jogo = this.Jogo;
+                DataAccess.RodadaAtual = 1;
+                App.Current.MainPage = new View.Jogo(Jogo.Grupo1);
+            }
+            else
+            {
+                MsgErro = erro;
+            }
+            
+            
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
