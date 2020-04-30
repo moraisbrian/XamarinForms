@@ -4,6 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:conv="clr-namespace:App11_Mimica.View.Util"
+             xmlns:cab="clr-namespace:App11_Mimica.View.Util"
              mc:Ignorable="d"
              x:Class="App11_Mimica.View.Jogo">
     <ContentPage.Resources>
@@ -12,29 +13,35 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout Margin="10">
-            <StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="{Binding NumeroGrupo}" />
-                    <Label Text="{Binding NomeGrupo}" />
+        <ScrollView>
+            <StackLayout Spacing="0">
+                <cab:Cabecalho />
+                <StackLayout Style="{StaticResource Container}">
+                    <Frame>
+                        <StackLayout Style="{StaticResource ContainerEspecial}">
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding NumeroGrupo}" FontSize="32" />
+                                <Label Text="{Binding NomeGrupo}" FontSize="32" />
+                            </StackLayout>
+                            <Label Text="{Binding PalavraPontuacao, Converter={StaticResource convPontuacao}}" FontSize="32" />
+                            <Label Text="{Binding Palavra}" HorizontalOptions="CenterAndExpand" FontSize="50" FontAttributes="Bold" />
+                            <Button Command="{Binding MostarPalavra}" IsVisible="{Binding IsVisibleBtnMostrar}" Text="Mostrar" />
+                        </StackLayout>
+                    </Frame>
+                    <StackLayout>
+                        <StackLayout IsVisible="{Binding IsVisibleContainerContagem}" VerticalOptions="FillAndExpand">
+                            <Label Text="{Binding TextoContagem}" FontSize="100" HorizontalOptions="CenterAndExpand"/>
+                            <Label Text="seg" HorizontalOptions="CenterAndExpand" />
+
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                <Button Text="Acertou" BackgroundColor="#00B22D" HorizontalOptions="Center" TextColor="White" Command="{Binding Acertou}" />
+                                <Button Text="Errou" BackgroundColor="#FF4000" HorizontalOptions="Center" TextColor="White" Command="{Binding Errou}" />
+                            </StackLayout>
+                        </StackLayout>
+                        <Button  IsVisible="{Binding IsVisibleBtnIniciar}" Text="Iniciar" Command="{Binding Iniciar}" />
+                    </StackLayout>
                 </StackLayout>
-                <Label Text="{Binding PalavraPontuacao, Converter={StaticResource convPontuacao}}" />
-                <Label Text="{Binding Palavra}" HorizontalOptions="CenterAndExpand" />
-                <Button Command="{Binding MostarPalavra}" IsVisible="{Binding IsVisibleBtnMostrar}" Text="Mostrar" BackgroundColor="Black" TextColor="White" HorizontalOptions="StartAndExpand" />
             </StackLayout>
-            <StackLayout>
-                <StackLayout Spacing="0" IsVisible="{Binding IsVisibleContainerContagem}">
-                    <Label Text="{Binding TextoContagem}" FontSize="100" HorizontalOptions="CenterAndExpand"/>
-                    <Label Text="seg" HorizontalOptions="CenterAndExpand" />
-                </StackLayout>
-                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="10">
-                    <Button Text="Acertou" BackgroundColor="Green" TextColor="White" Command="{Binding Acertou}" />
-                    <Button Text="Errou" BackgroundColor="Orange" TextColor="White" Command="{Binding Errou}" />
-                </StackLayout>
-            </StackLayout>
-            <StackLayout IsVisible="{Binding IsVisibleContainerIniciar}">
-                <Button Text="Iniciar" Command="{Binding Iniciar}" />
-            </StackLayout>
-        </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

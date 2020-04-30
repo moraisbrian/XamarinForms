@@ -18,7 +18,7 @@ namespace App11_Mimica.ViewModel
         private string _palavra;
         private string _textoContagem;
         private bool _isVisibleContainerContagem;
-        private bool _isVisibleContainerIniciar;
+        private bool _isVisibleBtnIniciar;
         private bool _isVisibleBtnMostrar;
 
         public byte PalavraPontuacao
@@ -41,10 +41,10 @@ namespace App11_Mimica.ViewModel
             get { return _isVisibleContainerContagem; }
             set { _isVisibleContainerContagem = value; OnPropertyChanged("IsVisibleContainerContagem"); }
         }
-        public bool IsVisibleContainerIniciar
+        public bool IsVisibleBtnIniciar
         {
-            get { return _isVisibleContainerIniciar; }
-            set { _isVisibleContainerIniciar = value; OnPropertyChanged("IsVisibleContainerIniciar"); }
+            get { return _isVisibleBtnIniciar; }
+            set { _isVisibleBtnIniciar = value; OnPropertyChanged("IsVisibleBtnIniciar"); }
         }
         public bool IsVisibleBtnMostrar
         {
@@ -67,7 +67,7 @@ namespace App11_Mimica.ViewModel
                 NumeroGrupo = "Grupo 2 ";
 
             IsVisibleContainerContagem = false;
-            IsVisibleContainerIniciar = false;
+            IsVisibleBtnIniciar = false;
             IsVisibleBtnMostrar = true;
             Palavra = "***********";
             PalavraPontuacao = 3;
@@ -115,10 +115,12 @@ namespace App11_Mimica.ViewModel
 
         private void IniciarAction()
         {
-            IsVisibleContainerIniciar = false;
+            IsVisibleBtnIniciar = false;
             IsVisibleContainerContagem = true;
 
             int i = DataAccess.Jogo.TempoPalavra;
+            TextoContagem = i.ToString();
+            i--;
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
                 TextoContagem = i.ToString();
@@ -137,7 +139,7 @@ namespace App11_Mimica.ViewModel
             if (numNivel == 0)
             {
                 Random rd = new Random();
-                int nivel = rd.Next(0, 2);
+                int nivel = rd.Next(0, 3);
                 int index = rd.Next(0, DataAccess.Palavras[nivel].Length);
                 Palavra = DataAccess.Palavras[nivel][index];
                 PalavraPontuacao = (byte)(nivel == 0 ? 1 : nivel == 1 ? 3 : 5);
@@ -165,7 +167,7 @@ namespace App11_Mimica.ViewModel
             }
 
             IsVisibleBtnMostrar = false;
-            IsVisibleContainerIniciar = true;
+            IsVisibleBtnIniciar = true;
             // PropertyChanged(this, new PropertyChangedEventArgs("Palavra"));
         }
 
