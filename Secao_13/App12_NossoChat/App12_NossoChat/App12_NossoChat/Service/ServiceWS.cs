@@ -58,5 +58,129 @@ namespace App12_NossoChat.Service
             else
                 return null;
         }
+
+        public static bool InsertChat(Chat chat)
+        {
+            string url = string.Format("{0}/chat", EnderecoBase);
+
+            FormUrlEncodedContent param = new FormUrlEncodedContent(new[]
+            {
+                new KeyValuePair<string, string>("nome", chat.nome)
+            });
+
+            HttpClient requisicao = new HttpClient();
+            HttpResponseMessage resposta = requisicao.PostAsync(url, param).GetAwaiter().GetResult();
+
+            if (resposta.StatusCode == HttpStatusCode.OK)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool RenomearChat(Chat chat)
+        {
+            string url = string.Format("{0}/chat/{1}", EnderecoBase, chat.id);
+
+            FormUrlEncodedContent param = new FormUrlEncodedContent(new[]
+            {
+                new KeyValuePair<string, string>("nome", chat.nome)
+            });
+
+            HttpClient requisicao = new HttpClient();
+            HttpResponseMessage resposta = requisicao.PutAsync(url, param).GetAwaiter().GetResult();
+
+            if (resposta.StatusCode == HttpStatusCode.OK)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool DeleteChat(Chat chat)
+        {
+            string url = string.Format("{0}/chats/delete/{1}", EnderecoBase, chat.id);
+            HttpClient requisicao = new HttpClient();
+            HttpResponseMessage resposta = requisicao.DeleteAsync(url).GetAwaiter().GetResult();
+
+            if (resposta.StatusCode == HttpStatusCode.OK)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static List<Mensagem> GetMensagensChat(Chat chat)
+        {
+            string url = string.Format("{0}/chats/{1}/msg", EnderecoBase, chat.id);
+            HttpClient requisicao = new HttpClient();
+            HttpResponseMessage resposta = requisicao.DeleteAsync(url).GetAwaiter().GetResult();
+
+            if (resposta.StatusCode == HttpStatusCode.OK)
+            {
+                string conteudo = resposta.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+
+                if (conteudo.Length > 2)
+                {
+                    List<Mensagem> mensagens = JsonConvert.DeserializeObject<List<Mensagem>>(conteudo);
+                    return mensagens;
+                }
+                else
+                    return null;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static bool InsertMensagem(Mensagem mensagem)
+        {
+            string url = string.Format("{0}/chat/{1}/msg", EnderecoBase, mensagem.id_chat);
+
+            FormUrlEncodedContent param = new FormUrlEncodedContent(new[]
+            {
+                new KeyValuePair<string, string>("mensagem", mensagem.mensagem),
+                new KeyValuePair<string, string>("id_usuario", mensagem.id_usuario.ToString())
+            });
+
+            HttpClient requisicao = new HttpClient();
+            HttpResponseMessage resposta = requisicao.PostAsync(url, param).GetAwaiter().GetResult();
+
+            if (resposta.StatusCode == HttpStatusCode.OK)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool DeleteMensagem(Mensagem mensagem)
+        {
+            string url = string.Format("{0}/chat/{1}/delete/{2}", EnderecoBase, mensagem.id_chat, mensagem.id);
+
+            HttpClient requisicao = new HttpClient();
+            HttpResponseMessage resposta = requisicao.DeleteAsync(url).GetAwaiter().GetResult();
+
+            if (resposta.StatusCode == HttpStatusCode.OK)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
