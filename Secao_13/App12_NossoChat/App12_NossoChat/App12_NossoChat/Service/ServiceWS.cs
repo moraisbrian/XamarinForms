@@ -31,7 +31,12 @@ namespace App12_NossoChat.Service
 
             if (resposta.StatusCode == HttpStatusCode.OK)
             {
+                string conteudo = resposta.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
+                if (conteudo.Length > 2)
+                {
+                    return JsonConvert.DeserializeObject<Usuario>(conteudo);
+                }
             }
 
             return null;

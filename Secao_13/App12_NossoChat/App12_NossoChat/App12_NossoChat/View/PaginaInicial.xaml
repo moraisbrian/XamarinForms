@@ -7,12 +7,13 @@
              BackgroundColor="#5ED055"
              x:Class="App12_NossoChat.View.PaginaInicial">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Padding="10">
             <Label Text="NossoChat" TextColor="White" />
-            <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+            <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Margin="0">
                 <Entry Text="{Binding Nome}" BackgroundColor="White" TextColor="#5ED055" />
-                <Entry Text="{Binding Senha}" BackgroundColor="White" TextColor="#5ED055" />
-                <Button BackgroundColor="Transparent" TextColor="White" Text="Acessar" />
+                <Entry Text="{Binding Senha}" IsPassword="True" BackgroundColor="White" TextColor="#5ED055" />
+                <Button BackgroundColor="Transparent" TextColor="White" Text="Acessar/Cadastrar" Command="{Binding AcessarCommand}" />
+                <Label Text="{Binding Mensagem}" TextColor="White" />
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

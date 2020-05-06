@@ -8,8 +8,9 @@
              x:Class="App12_NossoChat.View.CadastrarChat">
     <ContentPage.Content>
         <StackLayout>
-            <Entry TextColor="#5ED055" Placeholder="Nome do chat" PlaceholderColor="#5ED055" BackgroundColor="White" />
-            <Button BackgroundColor="Transparent" Text="Cadastrar" TextColor="White" />
+            <Entry Text="{Binding Nome}" TextColor="#5ED055" Placeholder="Nome do chat" PlaceholderColor="#5ED055" BackgroundColor="White" />
+            <Button BackgroundColor="Transparent" Text="Cadastrar" TextColor="White" Command="{Binding CadastrarCommand}" />
+            <Label Text="{Binding Mensagem}" TextColor="White" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
