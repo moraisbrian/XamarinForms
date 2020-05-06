@@ -28,7 +28,10 @@ namespace App12_NossoChat.ViewModel
         private void GoPaginaMensagem(Chat chat)
         {
             if (chat != null)
+            {
+                SelectedItemChat = null;
                 ((NavigationPage)App.Current.MainPage).Navigation.PushAsync(new View.Mensagem(chat));
+            }
         }
 
         public List<Chat> Chats

@@ -5,24 +5,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="App12_NossoChat.View.Mensagem">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Atualizar mensagens" IconImageSource="refresh.png" Command="{Binding AtualizarCommand}" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <ScrollView>
                 <StackLayout x:Name="SLMensagemContainer">
-                    <Frame BorderColor="#5ED055" CornerRadius="0" HorizontalOptions="Start">
-                        <StackLayout>
-                            <Label Text="Felipe123" FontSize="10" TextColor="#5ED055" />
-                            <Label Text="Olá amigos, tudo bem?" TextColor="#5ED055" />
-                        </StackLayout>
-                    </Frame>
-                    <StackLayout Padding="5" BackgroundColor="#5ED055" HorizontalOptions="End">
-                        <Label Text="Olá mundo!" TextColor="White" />
-                    </StackLayout>
                 </StackLayout>
             </ScrollView>
             <StackLayout Orientation="Horizontal">
-                <Entry Placeholder="Mensagem" TextColor="#5ED055" BackgroundColor="White" HorizontalOptions="FillAndExpand" />
-                <Button Text="Enviar" BackgroundColor="#5ED055" TextColor="White" />
+                <Entry Text="{Binding TxtMensagem}" Placeholder="Mensagem" TextColor="#5ED055" BackgroundColor="White" HorizontalOptions="FillAndExpand" />
+                <Button Command="{Binding BtnEnviarCommand}" Text="Enviar" BackgroundColor="#5ED055" TextColor="White" />
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

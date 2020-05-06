@@ -11,8 +11,16 @@ namespace App12_NossoChat.ViewModel
 {
     public class MensagemViewModel : INotifyPropertyChanged
     {
+        private Chat _chat;
         private StackLayout _stackLayout;
         private List<Mensagem> _mensagens;
+        private string _txtMensagem;
+
+        public string TxtMensagem
+        {
+            get { return _txtMensagem; }
+            set { _txtMensagem = value; OnPropertyChanged("TxtMensagem"); }
+        }
 
         public List<Mensagem> Mensagens
         {
@@ -26,10 +34,42 @@ namespace App12_NossoChat.ViewModel
             }
         }
 
+        public Command BtnEnviarCommand { get; set; }
+        public Command AtualizarCommand { get; set; }
+
         public MensagemViewModel(Chat chat, StackLayout SLMensagemContainer)
         {
+            _chat = chat;
             _stackLayout = SLMensagemContainer;
-            Mensagens = ServiceWS.GetMensagensChat(chat);
+            AtualizarAction();
+
+            BtnEnviarCommand = new Command(EnviarAction);
+            AtualizarCommand = new Command(AtualizarAction);
+
+            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            {
+                AtualizarAction();
+                return true;
+            });
+        }
+
+        private void EnviarAction()
+        {
+            var msg = new Mensagem()
+            {
+                id_usuario = UsuarioUtil.GetUsuarioLogado().id,
+                mensagem = TxtMensagem,
+                id_chat = _chat.id
+            };
+
+            ServiceWS.InsertMensagem(msg);
+            AtualizarAction();
+            TxtMensagem = string.Empty;
+        }
+
+        private void AtualizarAction()
+        {
+            Mensagens = ServiceWS.GetMensagensChat(_chat);
         }
 
         private void ShowOnScreen()
