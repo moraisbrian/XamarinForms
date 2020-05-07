@@ -1,59 +1,113 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.ComponentModel;
 using Xamarin.Forms;
+using System.ComponentModel;
+using System.Threading.Tasks;
 using App12_NossoChat.Model;
 using App12_NossoChat.Service;
+using App12_NossoChat;
 
 namespace App12_NossoChat.ViewModel
 {
     public class CadastrarChatViewModel : INotifyPropertyChanged
     {
-        private string _mensagem;
+        private bool _carregando;
+        public bool Carregando
+        {
+            get { return _carregando; }
+            set
+            {
+                _carregando = value;
+                OnPropertyChanged("Carregando");
+            }
+        }
 
-        public string Mensagem
+        private bool _mensagemErro;
+        public bool MensagemErro
+        {
+            get { return _mensagemErro; }
+            set
+            {
+                _mensagemErro = value;
+                OnPropertyChanged("MensagemErro");
+            }
+        }
+
+        public string nome { get; set; }
+        private string _mensagem { get; set; }
+        public string mensagem
         {
             get { return _mensagem; }
-            set { _mensagem = value; OnPropertyChanged("Mensagem"); }
+            set
+            {
+                _mensagem = value;
+                OnPropertyChanged("mensagem");
+            }
         }
 
         public Command CadastrarCommand { get; set; }
-        public string Nome { get; set; }
 
         public CadastrarChatViewModel()
         {
-            CadastrarCommand = new Command(CadastrarAction);
+            CadastrarCommand = new Command(CadastrarButton);
         }
-
-        private void CadastrarAction()
+        private void CadastrarButton()
         {
-            bool ok = ServiceWS.InsertChat(new Chat { nome = Nome });
-            
-            if (ok)
-            {
-                ((NavigationPage)App.Current.MainPage).Navigation.PopAsync();
+            bool Resultado = Task.Run(() => Cadastrar()).GetAwaiter().GetResult();
 
-                var nav = (NavigationPage)App.Current.MainPage;
-                var chats = (View.Chats)nav.RootPage;
-                var viewModel = (ChatsViewModel)chats.BindingContext;
-                
-                if (viewModel.AtualizarCommand.CanExecute(null))
+            if (Resultado == true)
+            {
+                var PaginaAtual = ((NavigationPage)App.Current.MainPage);
+                PaginaAtual.PopAsync();
+            }
+
+        }
+        private async Task<bool> Cadastrar()
+        {
+            Carregando = true;
+            MensagemErro = false;
+            try
+            {
+
+                var chat = new Chat() { nome = nome };
+                bool ok = await ServiceWS.InsertChat(chat);
+                if (ok == true)
                 {
-                    viewModel.AtualizarCommand.Execute(null);
+                    var PaginaAtual = ((NavigationPage)App.Current.MainPage);
+
+                    var Chats = (View.Chats)PaginaAtual.RootPage;
+                    var ViewModel = (ChatsViewModel)Chats.BindingContext;
+                    if (ViewModel.AtualizarCommand.CanExecute(null))
+                    {
+                        ViewModel.AtualizarCommand.Execute(null);
+                    }
+
+                    return true;
+                }
+                else
+                {
+                    mensagem = "Ocorreu um erro no cadastro!";
+                    Carregando = false;
+                    return false;
                 }
             }
-            else
+            catch (Exception e)
             {
-                Mensagem = "Ocorreu um erro no cadastro!";
+                MensagemErro = true;
+                mensagem = e.Message;
+                Carregando = false;
+                return false;
             }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged(string propertyName)
+        private void OnPropertyChanged(string PropertyName)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(PropertyName));
+            }
         }
     }
 }

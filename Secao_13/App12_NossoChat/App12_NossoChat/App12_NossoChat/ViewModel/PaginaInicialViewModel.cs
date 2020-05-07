@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Text;
+using System.ComponentModel;
 using Xamarin.Forms;
 using App12_NossoChat.Model;
 using App12_NossoChat.Service;
@@ -12,59 +12,108 @@ namespace App12_NossoChat.ViewModel
 {
     public class PaginaInicialViewModel : INotifyPropertyChanged
     {
+        private bool _carregando;
+        private bool _mensagemErro;
+
         private string _nome;
         private string _senha;
         private string _mensagem;
 
+        public bool Carregando
+        {
+            get { return _carregando; }
+            set
+            {
+                _carregando = value;
+                OnPropertyChanged("Carregando");
+            }
+        }
+        public bool MensagemErro
+        {
+            get { return _mensagemErro; }
+            set
+            {
+                _mensagemErro = value;
+                OnPropertyChanged("MensagemErro");
+            }
+        }
+
         public string Nome
         {
             get { return _nome; }
-            set { _nome = value; OnPropertyChanged("Nome"); }
+            set
+            {
+                _nome = value;
+                OnPropertyChanged("Nome");
+            }
         }
-
         public string Senha
         {
             get { return _senha; }
-            set { _senha = value; OnPropertyChanged("Senha"); }
+            set
+            {
+                _senha = value;
+                OnPropertyChanged("Senha");
+            }
         }
-
         public string Mensagem
         {
             get { return _mensagem; }
-            set { _mensagem = value; OnPropertyChanged("Mensagem"); }
+            set
+            {
+                _mensagem = value;
+                OnPropertyChanged("Mensagem");
+            }
         }
 
         public Command AcessarCommand { get; set; }
 
         public PaginaInicialViewModel()
         {
-            AcessarCommand = new Command(AcessarAction);
+            AcessarCommand = new Command(Acessar);
         }
 
-        private void AcessarAction()
+        private async void Acessar()
         {
-            Usuario usuario = new Usuario();
-            usuario.nome = Nome;
-            usuario.password = Senha;
+            try
+            {
+                MensagemErro = false;
+                Carregando = true;
+                var user = new Usuario();
+                user.nome = Nome;
+                user.password = Senha;
 
-            var usuarioLogado = ServiceWS.GetUsuario(usuario);
-            if (usuarioLogado == null)
-            {
-                Mensagem = "Senha incorreta!";
+                var usuarioLogado = await ServiceWS.GetUsuario(user);
+                if (usuarioLogado == null)
+                {
+                    Mensagem = "Senha incorreta.";
+                    Carregando = false;
+                }
+                else
+                {
+                    UsuarioUtil.SetUsuarioLogado(usuarioLogado);
+                    App.Current.MainPage = new NavigationPage(new View.Chats()) { BarBackgroundColor = Color.FromHex("#5ED055"), BarTextColor = Color.White };
+                }
             }
-            else
+            catch (Exception e)
             {
-                UsuarioUtil.SetUsuarioLogado(usuarioLogado);
-                App.Current.MainPage = new NavigationPage(new View.Chats()) { BarBackgroundColor = Color.FromHex("#5ED055"), BarTextColor = Color.White };
-                
+                MensagemErro = true;
             }
+            finally
+            {
+                Carregando = false;
+            }
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged(string propertyName)
+        private void OnPropertyChanged(string PropertyName)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(PropertyName));
+            }
         }
+
     }
 }

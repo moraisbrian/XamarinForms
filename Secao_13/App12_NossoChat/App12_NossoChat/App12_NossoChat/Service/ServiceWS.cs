@@ -5,187 +5,173 @@ using System.Net;
 using System.Net.Http;
 using App12_NossoChat.Model;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace App12_NossoChat.Service
 {
     public class ServiceWS
     {
-        private const string EnderecoBase = "http://ws.spacedu.com.br/xf2018/rest/api";
-
-        public static Usuario GetUsuario(Usuario usuario)
+        private static string EnderecoBase = "http://ws.spacedu.com.br/xf2018/rest/api";
+        
+        public async static Task<Usuario> GetUsuario(Usuario usuario)
         {
-            string url = string.Format("{0}/usuario", EnderecoBase);
-            /**
-             * QueryString
-             * StringContent praram = new StringContent(string.Format("?nome={0}&password={1}", usuario.nome, usuario.password));
+            var URL = EnderecoBase + "/usuario";
+            
+            /*
+             * QueryString: ?q=Footbal&tipo=imagem
+             * StringContent param = new StringContent(string.Format("?nome={0}&password={1}", usuario.nome, usuario.password));
              */
-
-            FormUrlEncodedContent param = new FormUrlEncodedContent(new[]
-            {
-                new KeyValuePair<string, string>("nome", usuario.nome),
-                new KeyValuePair<string, string>("password", usuario.password)
+            FormUrlEncodedContent param = new FormUrlEncodedContent(new[] {
+                new KeyValuePair<string,string>("nome",usuario.nome),
+                new KeyValuePair<string,string>("password", usuario.password)
             });
 
             HttpClient requisicao = new HttpClient();
-            HttpResponseMessage resposta = requisicao.PostAsync(url, param).GetAwaiter().GetResult();
+            HttpResponseMessage resposta = await requisicao.PostAsync(URL, param);
 
-            if (resposta.StatusCode == HttpStatusCode.OK)
+            if(resposta.StatusCode == HttpStatusCode.OK)
             {
-                string conteudo = resposta.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-
-                if (conteudo.Length > 2)
-                {
-                    return JsonConvert.DeserializeObject<Usuario>(conteudo);
-                }
+                var conteudo = await resposta.Content.ReadAsStringAsync();
+                
+                return JsonConvert.DeserializeObject<Usuario>(conteudo);
             }
 
             return null;
         }
 
-        public static List<Chat> GetChats()
+        public async static Task<List<Chat>> GetChats()
         {
-            string url = string.Format("{0}/chats", EnderecoBase);
+            var URL = EnderecoBase + "/chats";
+
             HttpClient requisicao = new HttpClient();
-            HttpResponseMessage resposta = requisicao.GetAsync(url).GetAwaiter().GetResult();
+            HttpResponseMessage resposta = await requisicao.GetAsync(URL);
 
             if (resposta.StatusCode == HttpStatusCode.OK)
             {
-                string conteudo = resposta.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-
+                string conteudo = await resposta.Content.ReadAsStringAsync();
+                
                 if (conteudo.Length > 2)
                 {
-                    List<Chat> chats = JsonConvert.DeserializeObject<List<Chat>>(conteudo);
-                    return chats;
+                    List<Chat> lista = JsonConvert.DeserializeObject<List<Chat>>(conteudo);
+                    return lista;
                 }
                 else
+                {
                     return null;
+                }
             }
             else
-                return null;
-        }
-
-        public static bool InsertChat(Chat chat)
-        {
-            string url = string.Format("{0}/chat", EnderecoBase);
-
-            FormUrlEncodedContent param = new FormUrlEncodedContent(new[]
             {
-                new KeyValuePair<string, string>("nome", chat.nome)
+                throw new Exception("Código de Erro HTTP: " + resposta.StatusCode);
+            }
+        }
+        public async static Task<bool> InsertChat(Chat chat)
+        {
+            var URL = EnderecoBase + "/chat";
+            
+            FormUrlEncodedContent param = new FormUrlEncodedContent(new[] {
+                new KeyValuePair<string,string>("nome", chat.nome)
             });
 
             HttpClient requisicao = new HttpClient();
-            HttpResponseMessage resposta = requisicao.PostAsync(url, param).GetAwaiter().GetResult();
+            HttpResponseMessage resposta = await requisicao.PostAsync(URL, param);
 
             if (resposta.StatusCode == HttpStatusCode.OK)
             {
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         public static bool RenomearChat(Chat chat)
         {
-            string url = string.Format("{0}/chat/{1}", EnderecoBase, chat.id);
+            var URL = EnderecoBase + "/chat/" + chat.id;
 
-            FormUrlEncodedContent param = new FormUrlEncodedContent(new[]
-            {
-                new KeyValuePair<string, string>("nome", chat.nome)
+            FormUrlEncodedContent param = new FormUrlEncodedContent(new[] {
+                new KeyValuePair<string,string>("nome", chat.nome)
             });
 
             HttpClient requisicao = new HttpClient();
-            HttpResponseMessage resposta = requisicao.PutAsync(url, param).GetAwaiter().GetResult();
+            HttpResponseMessage resposta = requisicao.PutAsync(URL, param).GetAwaiter().GetResult();
 
             if (resposta.StatusCode == HttpStatusCode.OK)
             {
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         public static bool DeleteChat(Chat chat)
         {
-            string url = string.Format("{0}/chats/delete/{1}", EnderecoBase, chat.id);
+            var URL = EnderecoBase + "/chat/delete/" + chat.id;
+
             HttpClient requisicao = new HttpClient();
-            HttpResponseMessage resposta = requisicao.DeleteAsync(url).GetAwaiter().GetResult();
+            HttpResponseMessage resposta = requisicao.DeleteAsync(URL).GetAwaiter().GetResult();
 
             if (resposta.StatusCode == HttpStatusCode.OK)
             {
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
-        public static List<Mensagem> GetMensagensChat(Chat chat)
+        public async static Task<List<Mensagem>> GetMensagensChat(Chat chat)
         {
-            string url = string.Format("{0}/chats/{1}/msg", EnderecoBase, chat.id);
+            var URL = EnderecoBase + "/chat/" + chat.id + "/msg";
+
             HttpClient requisicao = new HttpClient();
-            HttpResponseMessage resposta = requisicao.DeleteAsync(url).GetAwaiter().GetResult();
+            HttpResponseMessage resposta = await requisicao.GetAsync(URL);
 
             if (resposta.StatusCode == HttpStatusCode.OK)
             {
-                string conteudo = resposta.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                string conteudo = await resposta.Content.ReadAsStringAsync();
 
-                if (conteudo.Length > 2)
-                {
-                    List<Mensagem> mensagens = JsonConvert.DeserializeObject<List<Mensagem>>(conteudo);
-                    return mensagens;
+                if(conteudo != null) {
+                    if (conteudo.Length > 2)
+                    {
+                        List<Mensagem> lista = JsonConvert.DeserializeObject<List<Mensagem>>(conteudo);
+                        return lista;
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
-                else
-                    return null;
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
 
         public static bool InsertMensagem(Mensagem mensagem)
         {
-            string url = string.Format("{0}/chat/{1}/msg", EnderecoBase, mensagem.id_chat);
+            var URL = EnderecoBase + "/chat/" + mensagem.id_chat + "/msg";
 
-            FormUrlEncodedContent param = new FormUrlEncodedContent(new[]
-            {
-                new KeyValuePair<string, string>("mensagem", mensagem.mensagem),
-                new KeyValuePair<string, string>("id_usuario", mensagem.id_usuario.ToString())
+            FormUrlEncodedContent param = new FormUrlEncodedContent(new[] {
+                new KeyValuePair<string,string>("mensagem", mensagem.mensagem),
+                new KeyValuePair<string,string>("id_usuario", mensagem.id_usuario.ToString())
             });
 
             HttpClient requisicao = new HttpClient();
-            HttpResponseMessage resposta = requisicao.PostAsync(url, param).GetAwaiter().GetResult();
+            HttpResponseMessage resposta = requisicao.PostAsync(URL, param).GetAwaiter().GetResult();
 
             if (resposta.StatusCode == HttpStatusCode.OK)
             {
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
-
+        
         public static bool DeleteMensagem(Mensagem mensagem)
         {
-            string url = string.Format("{0}/chat/{1}/delete/{2}", EnderecoBase, mensagem.id_chat, mensagem.id);
+            var URL = EnderecoBase + "/chat/" + mensagem.id_chat + "/delete/" + mensagem.id;
 
             HttpClient requisicao = new HttpClient();
-            HttpResponseMessage resposta = requisicao.DeleteAsync(url).GetAwaiter().GetResult();
+            HttpResponseMessage resposta = requisicao.DeleteAsync(URL).GetAwaiter().GetResult();
 
             if (resposta.StatusCode == HttpStatusCode.OK)
             {
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
     }
 }

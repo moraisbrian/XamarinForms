@@ -1,26 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 using System.ComponentModel;
-using Xamarin.Forms;
 using App12_NossoChat.Model;
 using App12_NossoChat.Service;
-using System.Linq;
+using Xamarin.Forms;
+using System.Threading.Tasks;
 
 namespace App12_NossoChat.ViewModel
 {
     public class ChatsViewModel : INotifyPropertyChanged
     {
-        private List<Chat> _chats;
-        private Chat _selectedItemChat;
+        private bool _carregando;
+        public bool Carregando
+        {
+            get { return _carregando; }
+            set
+            {
+                _carregando = value;
+                OnPropertyChanged("Carregando");
+            }
+        }
 
-        public Chat SelectedItemChat 
-        { 
+        private bool _mensagemErro;
+        public bool MensagemErro
+        {
+            get { return _mensagemErro; }
+            set
+            {
+                _mensagemErro = value;
+                OnPropertyChanged("MensagemErro");
+            }
+        }
+
+        private Chat _selectedItemChat;
+        public Chat SelectedItemChat
+        {
             get { return _selectedItemChat; }
-            set 
-            { 
-                _selectedItemChat = value; 
+            set
+            {
+                _selectedItemChat = value;
                 OnPropertyChanged("SelectedItemChat");
+
                 GoPaginaMensagem(value);
             }
         }
@@ -32,12 +54,20 @@ namespace App12_NossoChat.ViewModel
                 SelectedItemChat = null;
                 ((NavigationPage)App.Current.MainPage).Navigation.PushAsync(new View.Mensagem(chat));
             }
+
         }
 
+
+
+        private List<Chat> _chats;
         public List<Chat> Chats
         {
             get { return _chats; }
-            set { _chats = value; OnPropertyChanged("Chats"); }
+            set
+            {
+                _chats = value;
+                OnPropertyChanged("Chats");
+            }
         }
 
         public Command AdicionarCommand { get; set; }
@@ -46,33 +76,49 @@ namespace App12_NossoChat.ViewModel
 
         public ChatsViewModel()
         {
-            Chats = ServiceWS.GetChats();
+            Task.Run(() => CarregarChats());
 
-            AdicionarCommand = new Command(AdicionarAction);
-            OrdenarCommand = new Command(OrdenarAction);
-            AtualizarCommand = new Command(AtualizarAction);
+            AdicionarCommand = new Command(Adicionar);
+            OrdenarCommand = new Command(Ordernar);
+            AtualizarCommand = new Command(Atualizar);
         }
+        private async Task CarregarChats()
+        {
+            try
+            {
+                MensagemErro = false;
+                Carregando = true;
+                Chats = await ServiceWS.GetChats();
+                Carregando = false;
+            }
+            catch (Exception e)
+            {
+                Carregando = false;
+                MensagemErro = true;
+            }
 
-        private void AdicionarAction()
+        }
+        private void Adicionar()
         {
             ((NavigationPage)App.Current.MainPage).Navigation.PushAsync(new View.CadastrarChat());
         }
-        
-        private void OrdenarAction()
+        private void Ordernar()
         {
-            Chats = Chats.OrderBy(x => x.nome).ToList();
+            Chats = Chats.OrderBy(a => a.nome).ToList();
         }
-
-        private void AtualizarAction()
+        private void Atualizar()
         {
-            Chats = ServiceWS.GetChats();
+            Task.Run(() => CarregarChats());
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged(string propertyName)
+        private void OnPropertyChanged(string PropertyName)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(PropertyName));
+            }
         }
+
     }
 }
