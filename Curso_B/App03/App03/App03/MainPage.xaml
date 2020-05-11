@@ -7,8 +7,8 @@
              xmlns:customs="clr-namespace:App03.Customs"
              x:Class="App03.MainPage">
 
-    <StackLayout x:Name="Container">
-        <customs:myButton Text="Eu sou super diferente!" />
+    <StackLayout x:Name="Container" VerticalOptions="CenterAndExpand">
+        <customs:MyButton Text="Eu sou super diferente!" />
     </StackLayout>
 
 </ContentPage>

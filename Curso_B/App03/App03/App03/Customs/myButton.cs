@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace App03.Customs
 {
-    public class myButton : Button
+    public class MyButton : Button
     {
     }
 }
