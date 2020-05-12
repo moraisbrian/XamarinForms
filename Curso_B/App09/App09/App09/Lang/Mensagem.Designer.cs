@@ -68,5 +68,14 @@ namespace App09.Lang {
                 return ResourceManager.GetString("Msg_E01", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O campo {0} é inválido.
+        /// </summary>
+        internal static string Msg_E02 {
+            get {
+                return ResourceManager.GetString("Msg_E02", resourceCulture);
+            }
+        }
     }
 }

@@ -25,12 +25,12 @@ namespace App09
                 {
                     Nome = txtNome.Text,
                     Email = txtEmail.Text,
-                    Cpf = txtCpf.Text
+                    CPF = txtCpf.Text
                 };
 
                 var listaRes = new List<ValidationResult>();
                 var contexto = new ValidationContext(pessoa);
-                var isValid = Validator.TryValidateObject(pessoa, contexto, listaRes);
+                var isValid = Validator.TryValidateObject(pessoa, contexto, listaRes, true);
 
                 if (!isValid)
                 {
