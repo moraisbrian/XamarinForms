@@ -16,6 +16,8 @@ namespace App08
         public MainPage()
         {
             InitializeComponent();
+
+            lblMsg.Text = Lang.AppLang.Msg_01;
         }
     }
 }
