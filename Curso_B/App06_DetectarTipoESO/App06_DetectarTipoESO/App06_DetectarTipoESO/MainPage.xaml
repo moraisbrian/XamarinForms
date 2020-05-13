@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="App06_DetectarTipoESO.MainPage">
+
+    <StackLayout x:Name="Container">
+        <Label Text="Welcome to Xamarin.Forms!" 
+           HorizontalOptions="Center">
+            <Label.TextColor>
+                <OnPlatform x:TypeArguments="Color">
+                    <On Platform="Android" Value="Green" />
+                    <On Platform="UWP" Value="Yellow" />
+                </OnPlatform>
+            </Label.TextColor>
+            <Label.FontSize>
+                <OnPlatform x:TypeArguments="x:Double">
+                    <On Platform="Android" Value="15" />
+                    <On Platform="UWP" Value="30" />
+                </OnPlatform>
+            </Label.FontSize>
+            <Label.FontAttributes>
+                <OnIdiom x:TypeArguments="FontAttributes" Tablet="Bold" Phone="Italic" />
+            </Label.FontAttributes>
+        </Label>
+    </StackLayout>
+
+</ContentPage>
