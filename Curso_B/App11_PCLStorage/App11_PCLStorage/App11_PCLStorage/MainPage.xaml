@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="App11_PCLStorage.MainPage">
+
+    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Padding="10">
+        <Label x:Name="lblConteudoArquivo" />
+        <Button Text="Ler arquivo" x:Name="btnLerArquivo" />
+        <Entry x:Name="txtConteudo" Placeholder="Digite um texto" />
+        <Button Text="Escrever" x:Name="btnEscrever" />
+    </StackLayout>
+
+</ContentPage>
