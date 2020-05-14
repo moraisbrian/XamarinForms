@@ -7,10 +7,26 @@
              x:Class="App12_Realm.MainPage">
 
     <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
+        <StackLayout>
+            <Label x:Name="lblId" Text="" IsVisible="False" />
+            <Entry x:Name="txtItem" Placeholder="Item" />
+            <Entry x:Name="txtQuantidade" Placeholder="Quantidade" Keyboard="Numeric" />
+            <Button x:Name="btnAdicionar" Text="Salvar" />
+        </StackLayout>
+        <StackLayout>
+            <ListView x:Name="listaProdutos">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Item}" Detail="{Binding Quantidade}">
+                            <TextCell.ContextActions>
+                                <MenuItem Text="Excluir" Clicked="MenuItemExcluir_Clicked" CommandParameter="{Binding .}" IsDestructive="True" />
+                                <MenuItem Text="Editar" Clicked="MenuItemEditar_Clicked" CommandParameter="{Binding .}" />
+                            </TextCell.ContextActions>
+                        </TextCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
     </StackLayout>
 
 </ContentPage>
