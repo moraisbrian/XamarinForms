@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="App13_Prism.Views.ListaProfissionais">
+
+    <StackLayout>
+        <ListView ItemsSource="{Binding ListaProfissional}" SeparatorColor="Gray">
+            <ListView.Behaviors>
+                <prism:EventToCommandBehavior EventName="ItemTapped" Command="{Binding ItemProfissionalTappedCommand}" EventArgsParameterPath="Item" />
+            </ListView.Behaviors>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ImageCell Text="{Binding Nome}" ImageSource="{Binding Img}" Detail="{Binding Especialidade}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+  
+</ContentPage>

@@ -6,6 +6,7 @@ using Xamarin.Essentials.Interfaces;
 using Xamarin.Essentials.Implementation;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using App13_Prism.Database;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace App13_Prism
@@ -25,7 +26,9 @@ namespace App13_Prism
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/LoginPage");
+            Massa.CriarMassaDados();
+
+            await NavigationService.NavigateAsync("NavigationPage/ListaProfissionais");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -33,7 +36,8 @@ namespace App13_Prism
             containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
 
             containerRegistry.RegisterForNavigation<NavigationPage>();
-            containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
+            containerRegistry.RegisterForNavigation<ListaProfissionais, ListaProfissionaisViewModel>();
+            containerRegistry.RegisterForNavigation<DetalheProfissional, DetalheProfissionalViewModel>();
         }
     }
 }
